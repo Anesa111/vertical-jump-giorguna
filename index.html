@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ნახტომისა და ფეთქებადი ძალის ვარჯიშები</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+GO:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Fira GO', sans-serif; background-color: #0d1117; color: #f0f6fc; }
+    .glass { background: rgba(22, 27, 34, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    .badge-gradient { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); }
+    .btn-gradient { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); }
+    .btn-gradient:hover { background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); }
+  </style>
+</head>
+<body class="min-h-screen pb-16">
+
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-50 glass border-b border-gray-800 px-4 py-3 mb-6">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl badge-gradient flex items-center justify-center text-white text-xl font-black shadow-lg">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <div>
+          <h1 class="font-extrabold text-lg text-white leading-tight">VERTICAL JUMP PROGRAM</h1>
+          <p class="text-xs text-indigo-400">ფეთქებადი ძალისა და ნახტომის ვარჯიშები</p>
+        </div>
+      </div>
+
+      <!-- Quick Stats & Timer -->
+      <div class="flex items-center gap-4">
+        <div class="bg-gray-800/80 px-3 py-1.5 rounded-lg border border-gray-700 text-xs flex items-center gap-2">
+          <i class="fa-solid fa-stopwatch text-amber-400"></i>
+          <span>დასვენების ტაიმერი:</span>
+          <span id="timerDisplay" class="font-bold text-amber-400 text-sm">01:00</span>
+          <button onclick="toggleTimer()" class="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded text-[10px] font-bold hover:bg-amber-500/30">
+            <i class="fa-solid fa-play" id="timerIcon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4">
+    <!-- Hero / Info Banner -->
+    <section class="glass rounded-2xl p-6 mb-8 border border-indigo-500/20 relative overflow-hidden">
+      <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <h2 class="text-2xl font-black text-white mb-2">🚀 მოემზადე მაქსიმალური ნახტომისთვის</h2>
+      <p class="text-gray-300 text-sm max-w-3xl leading-relaxed mb-4">
+        ეს პროგრამა შედგენილია სპეციალურად კუნთების ფეთქებადობისა და ვერტიკალური ნახტომის გასაზრდელად. თითოეულ ვარჯიშს თან ახლავს ზუსტი *ბიომექანიკური ანიმაცია*, რომელიც გიჩვენებთ მოძრაობის სწორ ტექნიკას!
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <div class="bg-gray-800/80 px-3 py-2 rounded-xl text-xs flex items-center gap-2 text-indigo-300 border border-gray-700">
+          <i class="fa-solid fa-box"></i> Box Jump
+        </div>
+        <div class="bg-gray-800/80 px-3 py-2 rounded-xl text-xs flex items-center gap-2 text-purple-300 border border-gray-700">
+          <i class="fa-solid fa-dumbbell"></i> ჰანტელები (15-25 lbs)
+        </div>
+        <div class="bg-gray-800/80 px-3 py-2 rounded-xl text-xs flex items-center gap-2 text-emerald-300 border border-gray-700">
+          <i class="fa-solid fa-disease"></i> Resistance Band (რეზინი)
+        </div>
+      </div>
+    </section>
+
+    <!-- Workout Day Selector Tabs -->
+    <div class="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none" id="dayTabs">
+      <!-- Tabs generated via JS -->
+    </div>
+
+    <!-- Active Day Section -->
+    <div id="workoutContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Exercise Cards with Live Canvas Animations generated via JS -->
+    </div>
+  </main>
+
+  <script>
+    // Complete Program Data with Exact Exercises from Images
+    const workoutData = [
+      {
+        dayId: "day1",
+        title: "დღე 1: Posterior Focused",
+        subtitle: "უკანა ჯაჭვისა და ფეხების ძალა",
+        badge: "ძალა + ტემპი",
+        color: "from-blue-500 to-indigo-600",
+        exercises: [
+          { name: "Paused Sumo Deadlifts", sets: "5 სეტი x 5", desc: "3 წამიანი პაუზა წვივის შუა ნაწილში. ფოკუსი დუნდულებსა და ბარძაყზე.", type: "deadlift" },
+          { name: "Deficit Deadlifts", sets: "5 სეტი x 5", desc: "დადექით 2-3 დისკზე უკეთესი ამპლიტუდისა და ღრმა გაჭიმვისთვის.", type: "deadlift" },
+          { name: "Forward Lunges", sets: "3 სეტი x 10", desc: "ნაბიჯები წინ, 10 გამეორება თითოეულ ფეხზე მარჯვენა და მარცხენა მხარეს.", type: "lunge" },
+          { name: "Bulgarian Split Squat Jumps", sets: "3 სეტი x 10", desc: "მსუბუქი ჰანტელებით, ცალ ფეხზე აფეთქებითი ნახტომი.", type: "lunge" },
+          { name: "Med Ball Jumps & Box Jumps", sets: "3x10 / 2x12", desc: "მედბოლით ნახტომები (3x10) და ყუთზე ხტომა (2x12).", type: "jump" }
+        ]
+      },
+      {
+        dayId: "day2",
+        title: "დღე 2: Strength Work",
+        subtitle: "ძალისმიერი ბაზა და აფეთქება",
+        badge: "მაქსიმალური აფეთქება",
+        color: "from-red-500 to-amber-600",
+        exercises: [
+          { name: "Pre-exhaust Leg Extensions", sets: "3 სეტი x 12", desc: "ოთხთავა კუნთის წინასწარი დაღლა ტრენაჟორზე.", type: "extension" },
+          { name: "Explosive Box Squats", sets: "7 სეტი x 5", desc: "იყავით მაქსიმალურად აფეთქებითი! ამოხტით ყუთიდან წონით.", type: "squat" },
+          { name: "Reverse Lunges & Step Ups", sets: "2x10 / 3x10", desc: "უკუსვლელები და ჰანტელებით სკამზე ასვლა.", type: "lunge" },
+          { name: "Barbell Jump Squats", sets: "5 სეტი x 5", desc: "მსუბუქი შტანგით, სწრაფი და უსაფრთხო ჩაჯდომა-ნახტომი.", type: "squat" },
+          { name: "Depth Jump into Broad Jump", sets: "5 სეტი x 5", desc: "სიმაღლიდან ჩამოხტომა და ეგრევე სიგრძეზე ნახტომი.", type: "jump" }
+        ]
+      },
+      {
+        dayId: "day3",
+        title: "დღე 3: Control The Weight",
+        subtitle: "წონის კონტროლი და ტემპი",
+        badge: "ტემპი & სუპერსეტები",
+        color: "from-purple-500 to-pink-600",
+        exercises: [
+          { name: "Tempo Squats + Superset", sets: "6 სეტი x 5", desc: "ნელი ჩასვლა/ამოწევა. თითოეულ სეტს მოჰყვება ჰანტელებით სუპერსეტი.", type: "squat" },
+          { name: "Hang Clean Jumps", sets: "6 სეტი x 5", desc: "მსუბუქი წონით აფეთქება (ხტომითი ამოწევა).", type: "clean" },
+          { name: "Single Leg Box Squats", sets: "6 სეტი x 8", desc: "ცალ ფეხზე ჩაჯდომები ყუთზე (შტანგით ან ჰანტელებით).", type: "squat" },
+          { name: "Pogo Jumps / Bounding", sets: "5 სეტი x 10", desc: "სწრაფი რიტმული ნახტომები ადგილზე კოჭის სახსრით.", type: "jump" }
+        ]
+      },
+      {
+        dayId: "day4",
+        title: "დღე 4: Fiber Work / Explosion",
+        subtitle: "ღრმა ამპლიტუდა და ბოჭკოები",
+        badge: "ღრმა ამპლიტუდა",
+        color: "from-emerald-500 to-teal-600",
+        exercises: [
+          { name: "ATG Jump Squats", sets: "4 სეტი x 10", desc: "ბოლომდე ჩაჯდომა (Ass to Grass) მსუბუქი წონით და აფეთქება.", type: "squat" },
+          { name: "Slow Eccentric Deadlifts", sets: "4 სეტი x 6", desc: "ნელი დაშვება (5 წამი), სწრაფი და აფეთქებითი ამოწევა.", type: "deadlift" },
+          { name: "Weighted Broad Jumps", sets: "5 სეტი x 8", desc: "მსუბუქი ჰანტელებით (10-20lbs) სიგრძეზე ნახტომი.", type: "jump" },
+          { name: "Power Cleans", sets: "5 სეტი x 5", desc: "მსუბუქი წონით, იდეალური ტექნიკით და აფეთქებით.", type: "clean" }
+        ]
+      },
+      {
+        dayId: "day5",
+        title: "დღე 5: Dumbbells Only",
+        subtitle: "მხოლოდ ჰანტელებით ვარჯიში",
+        badge: "ჰანტელების კომპლექსი",
+        color: "from-amber-500 to-orange-600",
+        exercises: [
+          { name: "Heavy Dumbbell Goblet Squat", sets: "5 სეტი x 12", desc: "ერთი მძიმე ჰანტელი მკერდთან, აფეთქებითი ჩაჯდომა.", type: "squat" },
+          { name: "RDLs (Romanian Deadlift)", sets: "5 სეტი x 10", desc: "რუმინული ამოწევა ჰანტელებით ბარძაყის უკანა ნაწილისთვის.", type: "deadlift" },
+          { name: "Split Jump Squats", sets: "5 სეტი x 8", desc: "მსუბუქი ჰანტელებით ნახტომები ადგილზე ფეხების ცვლით.", type: "lunge" }
+        ]
+      },
+      {
+        dayId: "day6",
+        title: "დღე 6: Death Day & Explosion",
+        subtitle: "მაქსიმალური დატვირთვის ფინალი",
+        badge: "ინტენსიური ფინალი",
+        color: "from-rose-600 to-red-700",
+        exercises: [
+          { name: "Paused & Tempo Front Squats", sets: "5x5 / 5x5", desc: "წინა ჩაჯდომები 3-წამიანი პაუზით და ნელი ტემპით.", type: "squat" },
+          { name: "Heavy Box Squats", sets: "6 სეტი x 5", desc: "გამოიყენეთ რეალური წონა, დაიცავით უსაფრთხოება!", type: "squat" },
+          { name: "Finisher: Sprints & Broad Jumps", sets: "8-15 სპრინტი", desc: "დაასრულეთ სესია მოკლე სპრინტებით და სიგრძეზე ნახტომებით.", type: "jump" }
+        ]
+      }
+    ];
+
+    let activeDayIndex = 0;
+    let animFrames = {};
+
+    function initTabs() {
+      const dayTabs = document.getElementById('dayTabs');
+      dayTabs.innerHTML = workoutData.map((d, i) => `
+        <button onclick="switchDay(${i})" class="px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 border ${
+          i === activeDayIndex 
+            ? 'bg-indigo-600 text-white border-indigo-400 shadow-lg shadow-indigo-500/30' 
+            : 'bg-gray-800/60 text-gray-400 border-gray-700 hover:bg-gray-700/60'
+        }">
+          <span>${d.title.split(':')[0]}</span>
+        </button>
+      `).join('');
+    }
+
+    function switchDay(index) {
+      activeDayIndex = index;
+      initTabs();
+      renderExercises();
+    }
+
+    function renderExercises() {
+      // Clear previous canvas animation loops
+      Object.keys(animFrames).forEach(id => cancelAnimationFrame(animFrames[id]));
+      animFrames = {};
+
+      const currentDay = workoutData[activeDayIndex];
+      const container = document.getElementById('workoutContainer');
+
+      container.innerHTML = currentDay.exercises.map((ex, idx) => `
+        <div class="glass rounded-2xl p-5 border border-gray-800 hover:border-gray-700 transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="font-bold text-white text-base leading-snug">${ex.name}</h3>
+              <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs font-extrabold px-2.5 py-1 rounded-lg">${ex.sets}</span>
+            </div>
+            
+            <!-- Dynamic Motion Canvas Animation -->
+            <div class="w-full h-44 bg-gray-950/80 rounded-xl overflow-hidden border border-gray-800/80 mb-4 flex items-center justify-center relative">
+              <canvas id="canvas_${idx}" width="280" height="176" class="w-full h-full"></canvas>
+            </div>
+
+            <p class="text-xs text-gray-400 leading-relaxed mb-4">${ex.desc}</p>
+          </div>
+
+          <!-- Set Progress Tracker -->
+          <div class="pt-3 border-t border-gray-800/60 flex items-center justify-between">
+            <span class="text-[11px] text-gray-400">სეტების შესრულება:</span>
+            <div class="flex gap-1.5" id="sets_${idx}">
+              <button onclick="this.classList.toggle('bg-emerald-500'); this.classList.toggle('bg-gray-700')" class="w-6 h-6 rounded-md bg-gray-700 text-[10px] font-bold text-white flex items-center justify-center transition-colors">1</button>
+              <button onclick="this.classList.toggle('bg-emerald-500'); this.classList.toggle('bg-gray-700')" class="w-6 h-6 rounded-md bg-gray-700 text-[10px] font-bold text-white flex items-center justify-center transition-colors">2</button>
+              <button onclick="this.classList.toggle('bg-emerald-500'); this.classList.toggle('bg-gray-700')" class="w-6 h-6 rounded-md bg-gray-700 text-[10px] font-bold text-white flex items-center justify-center transition-colors">3</button>
+              <button onclick="this.classList.toggle('bg-emerald-500'); this.classList.toggle('bg-gray-700')" class="w-6 h-6 rounded-md bg-gray-700 text-[10px] font-bold text-white flex items-center justify-center transition-colors">4</button>
+              <button onclick="this.classList.toggle('bg-emerald-500'); this.classList.toggle('bg-gray-700')" class="w-6 h-6 rounded-md bg-gray-700 text-[10px] font-bold text-white flex items-center justify-center transition-colors">5</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Start custom Canvas motion loops
+      currentDay.exercises.forEach((ex, idx) => {
+        startAnimation(canvas_${idx}, ex.type);
+      });
+    }
+
+    // Canvas Motion Engines for Anatomical Movements
+    function startAnimation(canvasId, type) {
+      const canvas = document.getElementById(canvasId);
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let t = 0;
+
+      function draw() {
+        t += 0.04;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Ground Line
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(20, 150); ctx.lineTo(260, 150);
+        ctx.stroke();
+
+        ctx.strokeStyle = '#818cf8';
+        ctx.fillStyle = '#6366f1';
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+
+        const cycle = (Math.sin(t) + 1) / 2; // Smooth 0 to 1
+
+        if (type === 'squat') {
+          // Squat Motion
+          let hipY = 80 + cycle * 35;
+          let kneeX = 130 + cycle * 12;
+          ctx.beginPath();
+          ctx.arc(140, hipY - 30, 8, 0, Math.PI*2); ctx.fill(); // Head
+          ctx.moveTo(140, hipY - 22); ctx.lineTo(140, hipY); // Spine
+          ctx.lineTo(kneeX, hipY + 25); ctx.lineTo(135, 150); // Leg 1
+          ctx.moveTo(140, hipY); ctx.lineTo(kneeX - 8, hipY + 25); ctx.lineTo(145, 150); // Leg 2
+          ctx.stroke();
+          // Barbell
+          ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 3;
+          ctx.beginPath(); ctx.moveTo(115, hipY - 20); ctx.lineTo(165, hipY - 20); ctx.stroke();
+        } else if (type === 'deadlift') {
+          // Deadlift / Hip Hinge
+          let bend = cycle * 0.8;
+          let headX = 140 - Math.sin(bend) * 25;
+          let headY = 60 + Math.cos(bend) * 25;
+          ctx.beginPath();
+          ctx.arc(headX, headY, 8, 0, Math.PI*2); ctx.fill(); // Head
+          ctx.moveTo(headX, headY + 8); ctx.lineTo(140, 105); // Spine hinge
+          ctx.lineTo(130, 150); ctx.moveTo(140, 105); ctx.lineTo(150, 150); // Legs
+          ctx.stroke();
+          // Barbell lowered and raised
+          let barY = 140 - (1 - cycle) * 35;
+          ctx.strokeStyle = '#fbbf24'; ctx.lineWidth = 4;
+          ctx.beginPath(); ctx.moveTo(115, barY); ctx.lineTo(165, barY); ctx.stroke();
+        } else if (type === 'jump') {
+          // Box Jump / Vertical Jump
+          let jumpY = cycle > 0.6 ? (cycle - 0.6) * 70 : 0;
+          let bodyY = 110 - jumpY;
+          // Box
+          ctx.fillStyle = '#334155'; ctx.fillRect(180, 100, 50, 50);
+          // Jumper
+          ctx.strokeStyle = '#38bdf8'; ctx.fillStyle = '#0284c7';
+          ctx.beginPath(); ctx.arc(110, bodyY - 30, 8, 0, Math.PI*2); ctx.fill();
+          ctx.moveTo(110, bodyY - 22); ctx.lineTo(110, bodyY);
+          ctx.lineTo(100, bodyY + 20); ctx.lineTo(105, bodyY + 38);
+          ctx.stroke();
+        } else {
+          // Lunge Motion
+          let lungeDist = cycle * 20;
+          ctx.beginPath(); ctx.arc(140, 60, 8, 0, Math.PI*2); ctx.fill();
+          ctx.moveTo(140, 68); ctx.lineTo(140, 100);
+          ctx.lineTo(140 + lungeDist, 125); ctx.lineTo(140 + lungeDist, 150); // Front leg
+          ctx.moveTo(140, 100); ctx.lineTo(140 - lungeDist, 125); ctx.lineTo(140 - lungeDist - 10, 150); // Back leg
+          ctx.stroke();
+        }
+
+        animFrames[canvasId] = requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    // Simple Rest Timer
+    let timerInterval = null;
+    let secondsLeft = 60;
+
+    function toggleTimer() {
+      const icon = document.getElementById('timerIcon');
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        icon.className = "fa-solid fa-play";
+      } else {
+        icon.className = "fa-solid fa-pause";
+        timerInterval = setInterval(() => {
+          secondsLeft--;
+          if (secondsLeft <= 0) {
+            secondsLeft = 60;
+            clearInterval(timerInterval);
+            timerInterval = null;
+            icon.className = "fa-solid fa-play";
+          }
+          let m = String(Math.floor(secondsLeft / 60)).padStart(2, '0');
+          let s = String(secondsLeft % 60).padStart(2, '0');
+          document.getElementById('timerDisplay').innerText = ${m}:${s};
+        }, 1000);
+      }
+    }
+
+    // App Initialization
+    window.onload = () => {
+      initTabs();
+      renderExercises();
+    };
+  </script>
+</body>
+</html>
